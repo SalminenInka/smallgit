@@ -1,0 +1,31 @@
+{
+  "name": "smallgit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SalminenInka/smallgit.git"
+  },
+  "keywords": [
+    "test",
+    "git"
+  ],
+  "author": "master",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SalminenInka/smallgit/issues"
+  },
+  "homepage": "https://github.com/SalminenInka/smallgit#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "typescript": "^4.9.3"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.14",
+    "@types/node": "^18.11.9"
+  }
+}
