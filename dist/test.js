@@ -5,5 +5,5 @@ app.get('/', function (req, res) {
     res.send('Hello Git');
 });
 console.log('Trying out the branch merge');
-console.log('merge me, daddy!');
+console.log('Merge me, daddy!');
 app.listen(6666);
