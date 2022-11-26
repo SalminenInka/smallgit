@@ -6,13 +6,6 @@ const { readFileSync } = require('fs');
 const debug = require('debug')('app');
 const fileName = './public-key.pem';
 const contents = readFileSync(fileName, 'utf-8');
-let tester = 'Hello JWT';
-if (tester !== 'Hello Token!') {
-    tester = 'Hello Json Web Token';
-}
-else {
-    tester = 'Goodbye Token';
-}
 app.use(jwt({ secret: contents, algorithms: ["RS256"] }));
 app.get('/protected', (req, res) => {
     res.send('Hello JWT');

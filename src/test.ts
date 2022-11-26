@@ -7,12 +7,7 @@ const debug = require('debug')('app');
 const fileName: string = './public-key.pem';
 const contents: string = readFileSync(fileName, 'utf-8');
 
-let tester: string = 'Hello JWT';
-if (tester !== 'Hello Token!') {
-  tester = 'Hello Json Web Token';
-} else {
-  tester = 'Goodbye Token';
-}
+
 app.use(jwt({ secret: contents, algorithms: ["RS256"] }));
 
 app.get('/protected', (req: any, res: { send: (arg0: string) => void; }) => {
