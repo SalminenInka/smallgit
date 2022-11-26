@@ -7,7 +7,12 @@ const debug = require('debug')('app');
 const fileName: string = './public-key.pem';
 const contents: string = readFileSync(fileName, 'utf-8');
 
-
+let tester: string = 'Merge me, daddy!';
+if (tester !== 'Hello Token!') {
+  tester = 'Efd up the merge.';
+} else {
+  tester = 'Nice merging.';
+}
 app.use(jwt({ secret: contents, algorithms: ["RS256"] }));
 
 app.get('/protected', (req: any, res: { send: (arg0: string) => void; }) => {
