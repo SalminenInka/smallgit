@@ -4,6 +4,5 @@ const app = express();
 app.get('/', function (req, res) {
     res.send('Hello Git');
 });
-console.log('Trying out the branch merge');
-console.log('Merge me, daddy!');
+console.log('Other branch annihilated');
 app.listen(6666);
