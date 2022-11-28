@@ -6,14 +6,15 @@ const { readFileSync } = require('fs');
 const debug = require('debug')('app');
 const fileName = './public-key.pem';
 const contents = readFileSync(fileName, 'utf-8');
-
-let tester = 'there is nothing';
-if (tester = 'there is nothing') {
-  tester = 'there is something';
-} else {
-  tester = 'there is still nothing';
+// this is where the test starts
+let tester = 'Merge me, daddy!';
+if (tester !== 'Hello Token!') {
+    tester = 'Fd up the merge.';
 }
-
+else {
+    tester = 'Nice merging.';
+}
+// this is where the test ends 
 app.use(jwt({ secret: contents, algorithms: ["RS256"] }));
 app.get('/protected', (req, res) => {
     res.send('Hello JWT');
