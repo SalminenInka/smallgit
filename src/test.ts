@@ -34,17 +34,17 @@ app.get('/database/:id', async (req: { params: { id: any; }; }, res: { json: (ar
     res.status(500).send(err);
   }
 });
-// The gate-keeping JWT
+// The gate-keeping JWT startts here
 app.use(jwt({ secret: contents, algorithms: ["RS256"] }));
 // Create new data
 app.post('/database', async (req: { body: { logger: any; }; }, res: { json: (arg0: string) => void; status: (arg0: number) => { (): any; new(): any; json: { (arg0: string): void; new(): any; }; }; }) => {
   const logger = req.body.logger;
-  const ownId = uuidv4();
+  const userId = uuidv4();
   console.log(logger);
-  console.log(ownId);
+  console.log(userId);
   try{
     await client
-      .query('INSERT INTO crud (user_id, user_name) VALUES ($1, $2)', [ownId, logger]);
+      .query('INSERT INTO crud (user_id, user_name) VALUES ($1, $2)', [userId, logger]);
       res.json(`${logger} logged with JWT`);
   } catch {
     res.status(500).json('Goodbye.');

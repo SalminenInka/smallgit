@@ -95,3 +95,4 @@ process.on('SIGTERM', () => {
         debug('HTTP server closed');
     });
 });
+//# sourceMappingURL=test.js.map

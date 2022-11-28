@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  application:
+    image: "localhost:6000/smallgit:latest"
+    ports:
+      - "8888:8080"
+    environment:
+      PORT: 8080
+      DB_HOST: host.docker.internal
+      DB_PORT: 5432
+      DB_USER: inkasalminen
+      DB_NAME: tokens
+      DB_PASSWORD: Smörrebröd2022
+      DB_POOL_SIZE: 10
+      DEBUG: app, app:*
