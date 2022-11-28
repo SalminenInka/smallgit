@@ -1,2 +1,20 @@
-GET http://localhost:8080/protected
-Authorization: Bearer <jwt>
+GET http://localhost:8080/database
+Authorization: Bearer <JWT>
+Content-Type: application/json
+
+###
+GET http://localhost:8080/database/f17dcc6b-244b-451e-9b2d-4ba51edb6260
+Content-Type: application/json
+
+###
+POST http://localhost:8080/database
+Authorization: Bearer <JWT>
+Content-Type: application/json
+
+{
+  "logger": "Jane Doe"
+}
+###
+DELETE http://localhost:8080/database/14ce5750-0298-4c5c-b16c-55e880a5df97
+Authorization: Bearer <JWT>
+Content-Type: application/json
