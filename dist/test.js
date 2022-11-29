@@ -1,18 +1,23 @@
 "use strict";
-const express = require('express');
-const app = express();
-const { expressjwt: jwt } = require('express-jwt');
-const { readFileSync } = require('fs');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+;
+const express_jwt_1 = require("express-jwt");
+const fs_1 = require("fs");
+const pg_1 = require("pg");
+const body_parser_1 = __importDefault(require("body-parser"));
+const uuid_1 = require("uuid");
 const debug = require('debug')('app');
-const { Client } = require('pg');
+const app = (0, express_1.default)();
 const fileName = './public-key.pem';
-const contents = readFileSync(fileName, 'utf-8');
-const bodyParser = require('body-parser');
-const { v4: uuidv4 } = require('uuid');
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(express.json());
-const client = new Client({
+const contents = (0, fs_1.readFileSync)(fileName, 'utf-8');
+app.use(body_parser_1.default.urlencoded({ extended: false }));
+app.use(body_parser_1.default.json());
+app.use(express_1.default.json());
+const client = new pg_1.Client({
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     user: process.env.DB_USER,
@@ -32,17 +37,17 @@ app.get('/database/:id', async (req, res) => {
         res.status(500).send(err);
     }
 });
-// The gate-keeping JWT
-app.use(jwt({ secret: contents, algorithms: ["RS256"] }));
+// The gate-keeping JWT startts here
+app.use((0, express_jwt_1.expressjwt)({ secret: contents, algorithms: ["RS256"] }));
 // Create new data
 app.post('/database', async (req, res) => {
     const logger = req.body.logger;
-    const ownId = uuidv4();
+    const userId = (0, uuid_1.v4)();
     console.log(logger);
-    console.log(ownId);
+    console.log(userId);
     try {
         await client
-            .query('INSERT INTO crud (user_id, user_name) VALUES ($1, $2)', [ownId, logger]);
+            .query('INSERT INTO crud (user_id, user_name) VALUES ($1, $2)', [userId, logger]);
         res.json(`${logger} logged with JWT`);
     }
     catch {

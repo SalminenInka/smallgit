@@ -1,13 +1,15 @@
-const express = require('express');
+import express, { Request, Response, NextFunction } from 'express';;
+import { expressjwt as jwt } from 'express-jwt';
+import { readFileSync } from 'fs';
+import { Client } from 'pg';
+import bodyParser from 'body-parser';
+import { v4 as uuidv4 } from 'uuid';
+import { Server } from 'http';
+
+const debug: NodeRequire = require('debug')('app');
 const app = express();
-const { expressjwt: jwt } = require('express-jwt');
-const { readFileSync } = require('fs');
-const debug = require('debug')('app');
-const { Client } = require('pg');
 const fileName: string = './public-key.pem';
 const contents: string = readFileSync(fileName, 'utf-8');
-const bodyParser = require('body-parser');
-const { v4: uuidv4 } = require('uuid');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -25,7 +27,7 @@ client.connect();
 
 // Retrieve some data on one user with user_id
 // No token needed for this action
-app.get('/database/:id', async (req: { params: { id: any; }; }, res: { json: (arg0: any) => void; status: (arg0: number) => { (): any; new(): any; send: { (arg0: unknown): void; new(): any; }; }; }) => {
+app.get('/database/:id', async (req: Express.Request, res: Express.Response) => {
   try {
     const rows = await client
     .query('SELECT user_name, stamp FROM crud WHERE user_id = ($1)', [req.params.id]);
@@ -37,7 +39,7 @@ app.get('/database/:id', async (req: { params: { id: any; }; }, res: { json: (ar
 // The gate-keeping JWT startts here
 app.use(jwt({ secret: contents, algorithms: ["RS256"] }));
 // Create new data
-app.post('/database', async (req: { body: { logger: any; }; }, res: { json: (arg0: string) => void; status: (arg0: number) => { (): any; new(): any; json: { (arg0: string): void; new(): any; }; }; }) => {
+app.post('/database', async (req: Express.Request, res: Express.Response) => {
   const logger = req.body.logger;
   const userId = uuidv4();
   console.log(logger);
@@ -51,8 +53,7 @@ app.post('/database', async (req: { body: { logger: any; }; }, res: { json: (arg
   }
 });
 // Retrieve all data 
-app.get('/database', async (req: { body: { logger: any; }; }, res: { json: (arg0: string) => void; status: (arg0: number) => { (): any; new(): any; json: { (arg0: string): void; new(): any; }; }; }) => {
-
+app.get('/database', async (req: Express.Request, res: Express.Response) => {
   try{
     const rows = await client
       .query('SELECT user_id, user_name, stamp FROM crud');
@@ -62,7 +63,7 @@ app.get('/database', async (req: { body: { logger: any; }; }, res: { json: (arg0
   }
 });
 // Update data with user_id
-app.put('/database/:id', async (req: { body: { logger: any; }; params: { id: any; }; }, res: { json: (arg0: string) => void; status: (arg0: number) => { (): any; new(): any; send: { (arg0: unknown): void; new(): any; }; }; }) => {
+app.put('/database/:id', async (req: Express.Request, res: Express.Response) => {
   try {
     const logger = req.body.logger;
     console.log(logger);
@@ -74,11 +75,7 @@ app.put('/database/:id', async (req: { body: { logger: any; }; params: { id: any
   }
 });
 // Delete according to user_id
-app.delete('/database/:id', async (req: {
-  params: any; body: { logger: any; }; 
-}, res: { json: (arg0: string) => void; status: (arg0: number) => {
-  send(err: unknown): unknown; (): any; new(): any; json: { (arg0: string): void; new(): any; }; 
-}; }) => {
+app.delete('/database/:id', async (req: Express.Request, res: Express.Response) => {
   try{
     await client
       .query('DELETE FROM crud WHERE user_id = ($1)', [req.params.id]);
@@ -89,8 +86,8 @@ app.delete('/database/:id', async (req: {
 });
 
 // Set port from env or by default 8080
-const port: number = +(process.env.PORT || '8080');
-const server = app.listen(port, () => {
+const port: string | number = +(process.env.PORT || '8080');
+const server: Server = app.listen(port, () => {
   debug(`Running on ${port}`);
 });
 
