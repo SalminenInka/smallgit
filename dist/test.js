@@ -4,18 +4,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-;
 const express_jwt_1 = require("express-jwt");
 const fs_1 = require("fs");
 const pg_1 = require("pg");
-const body_parser_1 = __importDefault(require("body-parser"));
 const uuid_1 = require("uuid");
 const debug = require('debug')('app');
 const app = (0, express_1.default)();
 const fileName = './public-key.pem';
 const contents = (0, fs_1.readFileSync)(fileName, 'utf-8');
-app.use(body_parser_1.default.urlencoded({ extended: false }));
-app.use(body_parser_1.default.json());
 app.use(express_1.default.json());
 const client = new pg_1.Client({
     host: process.env.DB_HOST,
@@ -65,7 +61,7 @@ app.get('/database', async (req, res) => {
         res.status(500).json('Goodbye.');
     }
 });
-// Update data with user_id
+// Update data with user_id, under construction
 app.put('/database/:id', async (req, res) => {
     try {
         const logger = req.body.logger;
