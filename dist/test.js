@@ -4,18 +4,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-;
 const express_jwt_1 = require("express-jwt");
 const fs_1 = require("fs");
 const pg_1 = require("pg");
-const body_parser_1 = __importDefault(require("body-parser"));
 const uuid_1 = require("uuid");
 const debug = require('debug')('app');
 const app = (0, express_1.default)();
 const fileName = './public-key.pem';
 const contents = (0, fs_1.readFileSync)(fileName, 'utf-8');
-app.use(body_parser_1.default.urlencoded({ extended: false }));
-app.use(body_parser_1.default.json());
 app.use(express_1.default.json());
 const client = new pg_1.Client({
     host: process.env.DB_HOST,
@@ -25,19 +21,6 @@ const client = new pg_1.Client({
     password: process.env.DB_PASSWORD,
 });
 client.connect();
-// Retrieve some data on one user with user_id
-// No token needed for this action
-app.get('/database/:id', async (req, res) => {
-    try {
-        const rows = await client
-            .query('SELECT user_name, stamp FROM crud WHERE user_id = ($1)', [req.params.id]);
-        res.json(rows.rows);
-    }
-    catch (err) {
-        res.status(500).send(err);
-    }
-});
-// The gate-keeping JWT startts here
 app.use((0, express_jwt_1.expressjwt)({ secret: contents, algorithms: ["RS256"] }));
 // Create new data
 app.post('/database', async (req, res) => {
@@ -48,13 +31,13 @@ app.post('/database', async (req, res) => {
     try {
         await client
             .query('INSERT INTO crud (user_id, user_name) VALUES ($1, $2)', [userId, logger]);
-        res.json(`${logger} logged with JWT`);
+        res.json(userId);
     }
     catch {
         res.status(500).json('Goodbye.');
     }
 });
-// Retrieve all data 
+// Retrieve all data
 app.get('/database', async (req, res) => {
     try {
         const rows = await client
@@ -65,7 +48,18 @@ app.get('/database', async (req, res) => {
         res.status(500).json('Goodbye.');
     }
 });
-// Update data with user_id
+// Retrieve some data on one user with user_id
+app.get('/database/:id', async (req, res) => {
+    try {
+        const rows = await client
+            .query('SELECT user_name, stamp FROM crud WHERE user_id = ($1)', [req.params.id]);
+        res.json(rows.rows);
+    }
+    catch (err) {
+        res.status(500).send(err);
+    }
+});
+// Update data with user_id, under construction
 app.put('/database/:id', async (req, res) => {
     try {
         const logger = req.body.logger;
