@@ -4,7 +4,6 @@ import { readFileSync } from 'fs';
 import { Client } from 'pg';
 import bodyParser from 'body-parser';
 import { v4 as uuidv4 } from 'uuid';
-import { Server } from 'http';
 
 const debug: NodeRequire = require('debug')('app');
 const app = express();
@@ -17,12 +16,11 @@ app.use(express.json());
 
 const client = new Client({
   host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
+  port: 5432, // <- not ok
   user: process.env.DB_USER,
   database: process.env.DB_NAME,
   password: process.env.DB_PASSWORD,
 });
-
 client.connect();
 
 // Retrieve some data on one user with user_id
@@ -62,7 +60,7 @@ app.get('/database', async (req: Express.Request, res: Express.Response) => {
     res.status(500).json('Goodbye.');
   }
 });
-// Update data with user_id
+// Update data with user_id, under construction
 app.put('/database/:id', async (req: Express.Request, res: Express.Response) => {
   try {
     const logger = req.body.logger;
@@ -86,8 +84,8 @@ app.delete('/database/:id', async (req: Express.Request, res: Express.Response) 
 });
 
 // Set port from env or by default 8080
-const port: string | number = +(process.env.PORT || '8080');
-const server: Server = app.listen(port, () => {
+const port = +(process.env.PORT || '8080');
+const server = app.listen(port, () => {
   debug(`Running on ${port}`);
 });
 

@@ -1,5 +1,5 @@
 GET http://localhost:8080/database
-Authorization: Bearer <JWT>
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwODEyOTYiLCJuYW1lIjoibWFzdGVyIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE2Njk3MjMxNjV9.zF3gSxv_XqEIp2UwM1-IHk9tqoMXL7ENKN53zmkNLQ8Jj5a1_jUYty_X7JRTfjsdwcSvt0mW3wQK3NLcWDWtxQAeB2td_UmRqjhYn7dKiVcKXuoRImj5ijHajzkS7EvOr9O87mKYh8W5GUjHgWasw4A-AqJXhvwqtCCZqwULEhkUkLSwVZ4hZiNvyknxk1g-ywQRMprXepNysXuqibvyPhPPc6V75dUbzHnClhgoz3MZ9JCMCUvwCjAfgXc9bbld0-OLSgMQji5rapC1EsCl6QN8TvH9FEpXQC5LM5i4ZHLCli23lmGoxPa31AE-dytsYw8bVOST3rMRyJQ9gCTTZQ
 Content-Type: application/json
 
 ###
@@ -8,23 +8,23 @@ Content-Type: application/json
 
 ###
 POST http://localhost:8080/database
-Authorization: Bearer <JWT>
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwODEyOTYiLCJuYW1lIjoibWFzdGVyIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE2Njk3MjMxNjV9.zF3gSxv_XqEIp2UwM1-IHk9tqoMXL7ENKN53zmkNLQ8Jj5a1_jUYty_X7JRTfjsdwcSvt0mW3wQK3NLcWDWtxQAeB2td_UmRqjhYn7dKiVcKXuoRImj5ijHajzkS7EvOr9O87mKYh8W5GUjHgWasw4A-AqJXhvwqtCCZqwULEhkUkLSwVZ4hZiNvyknxk1g-ywQRMprXepNysXuqibvyPhPPc6V75dUbzHnClhgoz3MZ9JCMCUvwCjAfgXc9bbld0-OLSgMQji5rapC1EsCl6QN8TvH9FEpXQC5LM5i4ZHLCli23lmGoxPa31AE-dytsYw8bVOST3rMRyJQ9gCTTZQ
 Content-Type: application/json
 
 {
-  "logger": "Jane Doe"
+  "logger": "Delete"
 }
 ###
-DELETE http://localhost:8080/database/:id
-Authorization: Bearer <JWT>
+DELETE http://localhost:8080/database/31fa56e1-71b8-47cc-a4f9-b93ce2482ac3
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwODEyOTYiLCJuYW1lIjoibWFzdGVyIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE2Njk3MjMxNjV9.zF3gSxv_XqEIp2UwM1-IHk9tqoMXL7ENKN53zmkNLQ8Jj5a1_jUYty_X7JRTfjsdwcSvt0mW3wQK3NLcWDWtxQAeB2td_UmRqjhYn7dKiVcKXuoRImj5ijHajzkS7EvOr9O87mKYh8W5GUjHgWasw4A-AqJXhvwqtCCZqwULEhkUkLSwVZ4hZiNvyknxk1g-ywQRMprXepNysXuqibvyPhPPc6V75dUbzHnClhgoz3MZ9JCMCUvwCjAfgXc9bbld0-OLSgMQji5rapC1EsCl6QN8TvH9FEpXQC5LM5i4ZHLCli23lmGoxPa31AE-dytsYw8bVOST3rMRyJQ9gCTTZQ
 Content-Type: application/json
 
 ###
-PUT http://localhost:8080/:id
-Authorization: Bearer <JWT>
+PUT http://localhost:8080/397b5bca-5f19-4a16-b17e-3121ed82114a
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwODEyOTYiLCJuYW1lIjoibWFzdGVyIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE2Njk3MjMxNjV9.zF3gSxv_XqEIp2UwM1-IHk9tqoMXL7ENKN53zmkNLQ8Jj5a1_jUYty_X7JRTfjsdwcSvt0mW3wQK3NLcWDWtxQAeB2td_UmRqjhYn7dKiVcKXuoRImj5ijHajzkS7EvOr9O87mKYh8W5GUjHgWasw4A-AqJXhvwqtCCZqwULEhkUkLSwVZ4hZiNvyknxk1g-ywQRMprXepNysXuqibvyPhPPc6V75dUbzHnClhgoz3MZ9JCMCUvwCjAfgXc9bbld0-OLSgMQji5rapC1EsCl6QN8TvH9FEpXQC5LM5i4ZHLCli23lmGoxPa31AE-dytsYw8bVOST3rMRyJQ9gCTTZQ
 Content-Type: application/json
 
 {
-  "logger": "Jane Doe"
+  "logger": "UD"
 }
 ###

@@ -19,7 +19,7 @@ app.use(body_parser_1.default.json());
 app.use(express_1.default.json());
 const client = new pg_1.Client({
     host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
+    port: 5432,
     user: process.env.DB_USER,
     database: process.env.DB_NAME,
     password: process.env.DB_PASSWORD,
