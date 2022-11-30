@@ -23,7 +23,8 @@ client.connect();
 interface GetRequest<T = any> extends Request {
   params: {
     id: string;
-  }
+  },
+  auth?: object;
 }
 
 interface PostRequest<T = any> extends Request {
