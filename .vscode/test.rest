@@ -26,6 +26,6 @@ Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwODEyOTYiL
 Content-Type: application/json
 
 {
-  "logger": "<New Name"
+  "logger": "<New Name>"
 }
 ###

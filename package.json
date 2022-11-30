@@ -2,7 +2,7 @@
   "name": "smallgit",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "test.js",
   "scripts": {
     "build": "npx tsc --watch"
   },
