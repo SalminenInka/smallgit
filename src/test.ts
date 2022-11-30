@@ -20,26 +20,30 @@ const client = new Client({
 });
 client.connect();
  
-interface GetRequest<T = any> extends Request {
+interface GetRequest extends Request {
   params: {
     id: string;
-  }
+  },
+  auth: object;
 }
- 
+
 interface PostRequest<T = any> extends Request {
   params: {
     id: string;
   },
-  body: T;
+  body: T,
+  auth: object;
+}
+
+interface DeleteRequest extends Request {
+  auth: object;
 }
  
-app.use(jwt({ secret: contents, algorithms: ["RS256"], audience: 'hello audience' }));
+app.use(jwt({ secret: contents, algorithms: ["RS256"], audience: process.env.AUD }));
 // Create new data
 app.post('/database', async (req: PostRequest<{ logger: string }>, res: Response) => {
   const logger = req.body.logger;
   const userId = uuidv4();
-  console.log(logger);
-  console.log(userId);
   try{
     await client
     .query('INSERT INTO crud (user_id, user_name) VALUES ($1, $2)', [userId, logger]);
@@ -49,17 +53,18 @@ app.post('/database', async (req: PostRequest<{ logger: string }>, res: Response
   }
 });
 // Retrieve all data
-app.get('/database', async (req: Request, res: Response) => {
+app.get('/database', async (req: GetRequest, res: Response) => {
   try{
     const rows = await client
     .query('SELECT user_id, user_name, stamp FROM crud');
+    console.log(req.auth);
     res.json(rows.rows);
   } catch {
     res.status(500).json('Goodbye.');
   }
 });
 // Retrieve some data on one user with user_id
-app.get('/database/:id', async (req: GetRequest<{ id: string}>, res: Response) => {
+app.get('/database/:id', async (req: GetRequest, res: Response) => {
   try {
     const rows = await client
     .query('SELECT user_name, stamp FROM crud WHERE user_id = ($1)', [req.params.id]);
@@ -75,16 +80,18 @@ app.put('/database/:id', async (req: PostRequest<{ logger: string }>, res: Respo
     console.log(logger);
     await client
     .query('UPDATE crud SET user_name = ($1) WHERE user_id = ($2)', [logger, req.params.id])
+    console.log(req.auth);
     res.json('User updated');
   } catch (err) {
     res.status(500).send(err);
   }
 });
 // Delete according to user_id
-app.delete('/database/:id', async (req: Request, res: Response) => {
+app.delete('/database/:id', async (req: DeleteRequest, res: Response) => {
   try{
     await client
     .query('DELETE FROM crud WHERE user_id = ($1)', [req.params.id]);
+    console.log(req.auth);
     res.json(`User deleted from db`);
   } catch (err) {
     res.status(500).send(err);

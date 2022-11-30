@@ -21,13 +21,11 @@ const client = new pg_1.Client({
     password: process.env.DB_PASSWORD,
 });
 client.connect();
-app.use((0, express_jwt_1.expressjwt)({ secret: contents, algorithms: ["RS256"], audience: 'hello audience' }));
+app.use((0, express_jwt_1.expressjwt)({ secret: contents, algorithms: ["RS256"], audience: process.env.AUD }));
 // Create new data
 app.post('/database', async (req, res) => {
     const logger = req.body.logger;
     const userId = (0, uuid_1.v4)();
-    console.log(logger);
-    console.log(userId);
     try {
         await client
             .query('INSERT INTO crud (user_id, user_name) VALUES ($1, $2)', [userId, logger]);
@@ -42,6 +40,7 @@ app.get('/database', async (req, res) => {
     try {
         const rows = await client
             .query('SELECT user_id, user_name, stamp FROM crud');
+        console.log(req.auth);
         res.json(rows.rows);
     }
     catch {
@@ -66,6 +65,7 @@ app.put('/database/:id', async (req, res) => {
         console.log(logger);
         await client
             .query('UPDATE crud SET user_name = ($1) WHERE user_id = ($2)', [logger, req.params.id]);
+        console.log(req.auth);
         res.json('User updated');
     }
     catch (err) {
@@ -77,6 +77,7 @@ app.delete('/database/:id', async (req, res) => {
     try {
         await client
             .query('DELETE FROM crud WHERE user_id = ($1)', [req.params.id]);
+        console.log(req.auth);
         res.json(`User deleted from db`);
     }
     catch (err) {
