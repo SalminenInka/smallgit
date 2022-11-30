@@ -4,30 +4,56 @@
 GET http://localhost:8080/database
 Authorization: Bearer {{{{bearerToken}}}}
 Content-Type: application/json
-
 ###
-GET http://localhost:8080/:id
+GET http://localhost:30000/database/:id
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwODEyOTYiLCJuYW1lIjoibWFzdGVyIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE2Njk4MzExOTksImF1ZCI6ImhlbGxvLWF1ZGllbmNlIn0.PHppzi2p5_krgH49ZnC3OK1WEPZ_6x_LRNKmUa7M1YpsI1qDP4hq_sedtUD5ztavc81KhOKsZNCyM11jRZLt7Lj4bSYBG3BeUbzXGuVIKPtXocoHQ9aiDi2JzClA7sXkUa-3Qq35y_ZfC7QboacdlVVDVXjOHa2vq3TVU9TcHowMAC9gjSHg_7GWwxdGd2J0dH9Gwg7ua88zaTtkeg36m5mulsl7r_fUNoDo-SvEz-4eeZGvRh02c-DivmWZriomVVosce0OIQ_fAwf5bBqsvKK3u9ul1gTsSIT-pD7i9AviQdptUIyOJ-_EfBnYQSgLUR97iLOR0v0rwlpyWh6P2Q
+Content-Type: application/json
+###
+POST http://localhost:30000/database
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwODEyOTYiLCJuYW1lIjoibWFzdGVyIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE2Njk4MzExOTksImF1ZCI6ImhlbGxvLWF1ZGllbmNlIn0.PHppzi2p5_krgH49ZnC3OK1WEPZ_6x_LRNKmUa7M1YpsI1qDP4hq_sedtUD5ztavc81KhOKsZNCyM11jRZLt7Lj4bSYBG3BeUbzXGuVIKPtXocoHQ9aiDi2JzClA7sXkUa-3Qq35y_ZfC7QboacdlVVDVXjOHa2vq3TVU9TcHowMAC9gjSHg_7GWwxdGd2J0dH9Gwg7ua88zaTtkeg36m5mulsl7r_fUNoDo-SvEz-4eeZGvRh02c-DivmWZriomVVosce0OIQ_fAwf5bBqsvKK3u9ul1gTsSIT-pD7i9AviQdptUIyOJ-_EfBnYQSgLUR97iLOR0v0rwlpyWh6P2Q
 Content-Type: application/json
 
+{
+  "logger": "<new name>"
+}
+###
+DELETE http://localhost:30000/database/:id
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwODEyOTYiLCJuYW1lIjoibWFzdGVyIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE2Njk4MzExOTksImF1ZCI6ImhlbGxvLWF1ZGllbmNlIn0.PHppzi2p5_krgH49ZnC3OK1WEPZ_6x_LRNKmUa7M1YpsI1qDP4hq_sedtUD5ztavc81KhOKsZNCyM11jRZLt7Lj4bSYBG3BeUbzXGuVIKPtXocoHQ9aiDi2JzClA7sXkUa-3Qq35y_ZfC7QboacdlVVDVXjOHa2vq3TVU9TcHowMAC9gjSHg_7GWwxdGd2J0dH9Gwg7ua88zaTtkeg36m5mulsl7r_fUNoDo-SvEz-4eeZGvRh02c-DivmWZriomVVosce0OIQ_fAwf5bBqsvKK3u9ul1gTsSIT-pD7i9AviQdptUIyOJ-_EfBnYQSgLUR97iLOR0v0rwlpyWh6P2Q
+Content-Type: application/json
+###
+PUT http://localhost:30000/database/:id
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwODEyOTYiLCJuYW1lIjoibWFzdGVyIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE2Njk4MzExOTksImF1ZCI6ImhlbGxvLWF1ZGllbmNlIn0.PHppzi2p5_krgH49ZnC3OK1WEPZ_6x_LRNKmUa7M1YpsI1qDP4hq_sedtUD5ztavc81KhOKsZNCyM11jRZLt7Lj4bSYBG3BeUbzXGuVIKPtXocoHQ9aiDi2JzClA7sXkUa-3Qq35y_ZfC7QboacdlVVDVXjOHa2vq3TVU9TcHowMAC9gjSHg_7GWwxdGd2J0dH9Gwg7ua88zaTtkeg36m5mulsl7r_fUNoDo-SvEz-4eeZGvRh02c-DivmWZriomVVosce0OIQ_fAwf5bBqsvKK3u9ul1gTsSIT-pD7i9AviQdptUIyOJ-_EfBnYQSgLUR97iLOR0v0rwlpyWh6P2Q
+Content-Type: application/json
+
+{
+  "logger": "Test Guy"
+}
+###
+GET http://localhost:8080/database
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwODEyOTYiLCJuYW1lIjoibWFzdGVyIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE2Njk4MzExOTksImF1ZCI6ImhlbGxvLWF1ZGllbmNlIn0.PHppzi2p5_krgH49ZnC3OK1WEPZ_6x_LRNKmUa7M1YpsI1qDP4hq_sedtUD5ztavc81KhOKsZNCyM11jRZLt7Lj4bSYBG3BeUbzXGuVIKPtXocoHQ9aiDi2JzClA7sXkUa-3Qq35y_ZfC7QboacdlVVDVXjOHa2vq3TVU9TcHowMAC9gjSHg_7GWwxdGd2J0dH9Gwg7ua88zaTtkeg36m5mulsl7r_fUNoDo-SvEz-4eeZGvRh02c-DivmWZriomVVosce0OIQ_fAwf5bBqsvKK3u9ul1gTsSIT-pD7i9AviQdptUIyOJ-_EfBnYQSgLUR97iLOR0v0rwlpyWh6P2Q
+Content-Type: application/json
+###
+GET http://localhost:8080/database/:id
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwODEyOTYiLCJuYW1lIjoibWFzdGVyIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE2Njk4MzExOTksImF1ZCI6ImhlbGxvLWF1ZGllbmNlIn0.PHppzi2p5_krgH49ZnC3OK1WEPZ_6x_LRNKmUa7M1YpsI1qDP4hq_sedtUD5ztavc81KhOKsZNCyM11jRZLt7Lj4bSYBG3BeUbzXGuVIKPtXocoHQ9aiDi2JzClA7sXkUa-3Qq35y_ZfC7QboacdlVVDVXjOHa2vq3TVU9TcHowMAC9gjSHg_7GWwxdGd2J0dH9Gwg7ua88zaTtkeg36m5mulsl7r_fUNoDo-SvEz-4eeZGvRh02c-DivmWZriomVVosce0OIQ_fAwf5bBqsvKK3u9ul1gTsSIT-pD7i9AviQdptUIyOJ-_EfBnYQSgLUR97iLOR0v0rwlpyWh6P2Q
+Content-Type: application/json
 ###
 POST http://localhost:8080/database
 Authorization: Bearer {{{{bearerToken}}}}
 Content-Type: application/json
 
 {
-  "logger": "Delete"
+  "logger": "Jorma Soul"
 }
 ###
 DELETE http://localhost:8080/database/31fa56e1-71b8-47cc-a4f9-b93ce2482ac3
 Authorization: Bearer {{{{bearerToken}}}}
 Content-Type: application/json
-
 ###
 PUT http://localhost:8080/397b5bca-5f19-4a16-b17e-3121ed82114a
 Authorization: Bearer {{{{bearerToken}}}}
 Content-Type: application/json
 
 {
-  "logger": "UD"
+  "logger": "Spagetti O"
 }
 ###

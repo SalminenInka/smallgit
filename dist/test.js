@@ -33,7 +33,6 @@ app.get('/database/:id', async (req, res) => {
         res.status(500).send(err);
     }
 });
-// The gate-keeping JWT startts here
 app.use((0, express_jwt_1.expressjwt)({ secret: contents, algorithms: ["RS256"] }));
 // Create new data
 app.post('/database', async (req, res) => {
@@ -61,13 +60,13 @@ app.get('/database', async (req, res) => {
         res.status(500).json('Goodbye.');
     }
 });
-// Update data with user_id, under construction
 app.put('/database/:id', async (req, res) => {
     try {
         const logger = req.body.logger;
         console.log(logger);
         await client
             .query('UPDATE crud SET user_name = ($1) WHERE user_id = ($2)', [logger, req.params.id]);
+        console.log(req.auth);
         res.json('User updated');
     }
     catch (err) {
@@ -79,6 +78,7 @@ app.delete('/database/:id', async (req, res) => {
     try {
         await client
             .query('DELETE FROM crud WHERE user_id = ($1)', [req.params.id]);
+        console.log(req.auth);
         res.json(`User deleted from db`);
     }
     catch (err) {
