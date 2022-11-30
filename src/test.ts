@@ -33,7 +33,7 @@ interface PostRequest<T = any> extends Request {
   body: T;
 }
  
-app.use(jwt({ secret: contents, algorithms: ["RS256"] }));
+app.use(jwt({ secret: contents, algorithms: ["RS256"], audience: 'hello audience' }));
 // Create new data
 app.post('/database', async (req: PostRequest<{ logger: string }>, res: Response) => {
   const logger = req.body.logger;

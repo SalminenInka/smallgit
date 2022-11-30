@@ -21,7 +21,7 @@ const client = new pg_1.Client({
     password: process.env.DB_PASSWORD,
 });
 client.connect();
-app.use((0, express_jwt_1.expressjwt)({ secret: contents, algorithms: ["RS256"] }));
+app.use((0, express_jwt_1.expressjwt)({ secret: contents, algorithms: ["RS256"], audience: 'hello audience' }));
 // Create new data
 app.post('/database', async (req, res) => {
     const logger = req.body.logger;
